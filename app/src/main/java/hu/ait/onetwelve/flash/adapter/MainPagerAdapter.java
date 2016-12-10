@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import hu.ait.onetwelve.flash.fragments.MyDecksFragment;
 import hu.ait.onetwelve.flash.fragments.OtherFragment;
 import hu.ait.onetwelve.flash.fragments.SharedDecksFragment;
-import hu.ait.onetwelve.flash.model.MainActivity;
 
 /**
  * Created by Camden Sikes on 12/10/2016.

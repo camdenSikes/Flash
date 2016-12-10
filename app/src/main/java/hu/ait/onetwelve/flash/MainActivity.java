@@ -1,4 +1,4 @@
-package hu.ait.onetwelve.flash.model;
+package hu.ait.onetwelve.flash;
 
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -15,7 +15,7 @@ import android.view.View;
 import hu.ait.onetwelve.flash.R;
 import hu.ait.onetwelve.flash.adapter.MainPagerAdapter;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
 
     private MainPagerAdapter mPagerAdapter;
