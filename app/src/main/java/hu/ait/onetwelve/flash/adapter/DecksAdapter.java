@@ -35,10 +35,12 @@ public class DecksAdapter extends RecyclerView.Adapter<DecksAdapter.ViewHolder> 
         TextView tvTitle;
         @BindView(R.id.btnViewCards)
         Button btnViewCards;
+        @BindView(R.id.btnEdit)
+        Button btnEdit;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 
@@ -55,7 +57,7 @@ public class DecksAdapter extends RecyclerView.Adapter<DecksAdapter.ViewHolder> 
         this.deckList = new ArrayList<Deck>();
         this.deckKeys = new ArrayList<String>();
 
-        decksRef = FirebaseDatabase.getInstance().getReference("posts");
+        decksRef = FirebaseDatabase.getInstance().getReference("deck");
     }
 
     @Override
@@ -68,9 +70,9 @@ public class DecksAdapter extends RecyclerView.Adapter<DecksAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Deck tmpPost = deckList.get(position);
-        holder.tvAuthor.setText(tmpPost.getAuthor());
-        holder.tvTitle.setText(tmpPost.getTitle());
+        Deck tmpDeck = deckList.get(position);
+        holder.tvAuthor.setText(tmpDeck.getAuthor());
+        holder.tvTitle.setText(tmpDeck.getTitle());
         holder.btnViewCards.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,9 +80,15 @@ public class DecksAdapter extends RecyclerView.Adapter<DecksAdapter.ViewHolder> 
             }
         });
 
-        if(uId.equals(tmpPost.getUid())) {
-            holder.itemView.setVisibility(View.GONE);
+        if(uId.equals(tmpDeck.getUid())) {
+            holder.btnEdit.setVisibility(View.VISIBLE);
         }
+        holder.btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO: edit deck
+            }
+        });
 
         setAnimation(holder.itemView, position);
     }

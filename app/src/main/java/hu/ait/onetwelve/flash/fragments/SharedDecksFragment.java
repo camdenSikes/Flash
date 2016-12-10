@@ -27,14 +27,15 @@ import hu.ait.onetwelve.flash.model.Deck;
 public class SharedDecksFragment extends Fragment {
 
     private DecksAdapter decksAdapter;
+    private String uid;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_shareddecks, null);
+        uid = ((MainActivity) container.getContext()).getUid();
 
-        decksAdapter = new DecksAdapter(container.getContext().getApplicationContext(),
-                ((MainActivity) container.getContext()).getUid());
+        decksAdapter = new DecksAdapter(container.getContext().getApplicationContext(), uid);
         RecyclerView recyclerViewPlaces = (RecyclerView) rootView.findViewById(
                 R.id.recyclerSharedDecks);
         LinearLayoutManager layoutManager = new LinearLayoutManager(container.getContext());
@@ -43,19 +44,21 @@ public class SharedDecksFragment extends Fragment {
         recyclerViewPlaces.setLayoutManager(layoutManager);
         recyclerViewPlaces.setAdapter(decksAdapter);
 
-        initPostsListener();
+        initDecksListener();
 
 
         return rootView;
     }
 
-    private void initPostsListener() {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("posts");
+    private void initDecksListener() {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("deck");
         ref.orderByKey().addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Deck newDeck = dataSnapshot.getValue(Deck.class);
-                decksAdapter.addDeck(newDeck, dataSnapshot.getKey());
+                if(!uid.equals(newDeck.getUid())) {
+                    decksAdapter.addDeck(newDeck, dataSnapshot.getKey());
+                }
             }
 
             @Override
