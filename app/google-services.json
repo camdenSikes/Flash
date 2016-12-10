@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "491354655399",
+    "firebase_url": "https://flash-d8d61.firebaseio.com",
+    "project_id": "flash-d8d61",
+    "storage_bucket": "flash-d8d61.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:491354655399:android:a4a7c3be4bb8ffe4",
+        "android_client_info": {
+          "package_name": "hu.ait.onetwelve.flash"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "491354655399-ihkku4m582nqlt2afskioscve9740mfd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "hu.ait.onetwelve.flash",
+            "certificate_hash": "68597D4B35D8A818ABFE45C04AFD37BE5C9244CC"
+          }
+        },
+        {
+          "client_id": "491354655399-tg58iaf0ur970k33ft3eiq83652kck50.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC57dQWmyxQtkcsnwdNj1luHlVf0ZudJUE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "491354655399-tg58iaf0ur970k33ft3eiq83652kck50.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
