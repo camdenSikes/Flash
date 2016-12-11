@@ -31,7 +31,7 @@ public class MyDecksFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_shareddecks, null);
+        View rootView = inflater.inflate(R.layout.fragment_deck_list, null);
         uid = ((MainActivity) container.getContext()).getUid();
 
         decksAdapter = new DecksAdapter(container.getContext().getApplicationContext(), uid);
