@@ -51,6 +51,8 @@ public class DecksAdapter extends RecyclerView.Adapter<DecksAdapter.ViewHolder> 
         Button btnEdit;
         @BindView(R.id.card_view)
         View cardView;
+        @BindView(R.id.deckButtonLayout)
+        View deckButtonLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -122,6 +124,9 @@ public class DecksAdapter extends RecyclerView.Adapter<DecksAdapter.ViewHolder> 
             }
         });
 
+        if(uId.equals(tmpDeck.getUid())) {
+            holder.deckButtonLayout.setVisibility(View.VISIBLE);
+        }
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -144,9 +149,6 @@ public class DecksAdapter extends RecyclerView.Adapter<DecksAdapter.ViewHolder> 
             }
         });
 
-        if(uId.equals(tmpDeck.getUid())) {
-            holder.btnEdit.setVisibility(View.VISIBLE);
-        }
         holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
