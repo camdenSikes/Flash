@@ -145,7 +145,7 @@ public class FlipLayout extends FrameLayout
 
   @Override
   public void onClick(View view) {
-    toggleDown();
+    toggleUp();
   }
 
   @Override
@@ -160,12 +160,12 @@ public class FlipLayout extends FrameLayout
 
   @Override
   public void onSwipeUp() {
-    toggleUp();
+    toggleDown();
   }
 
   @Override
   public void onSwipeDown() {
-    toggleDown();
+    toggleUp();
   }
 
   private enum Direction {

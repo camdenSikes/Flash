@@ -1,61 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="10">
 
-    <TextView
-        android:id="@+id/tvDeckName"
-        android:gravity="center_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Deck Name"/>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabIncorrect"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="13dp"
-        android:layout_marginStart="13dp"
-        android:layout_marginBottom="14dp"
-        app:backgroundTint="@android:color/holo_red_dark"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
 
-    <TextView
-        android:id="@+id/tvDeckPosition"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="Card / Total"
-        android:layout_below="@+id/tvDeckName"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/tvDeckHeader"
+            android:gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Deck Name"/>
+
+        <TextView
+            android:id="@+id/tvDeckPosition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Card / Total"
+            android:layout_below="@+id/tvDeckName"/>
+
+    </LinearLayout>
+
 
     <hu.ait.onetwelve.flash.view.FlipLayout
+        android:id="@+id/flipCards"
         android:layout_width="match_parent"
         android:visibility="visible"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_below="@+id/tvDeckPosition"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-
-        <include layout="@layout/layout_card_back"/>
+        android:layout_height="0dp"
+        android:layout_weight="6">
 
         <include layout="@layout/layout_card_front"/>
+        <include layout="@layout/layout_card_back"/>
+
     </hu.ait.onetwelve.flash.view.FlipLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabCorrect"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="14dp"
-        android:layout_marginEnd="14dp"
-        app:backgroundTint="@android:color/holo_green_dark"
-        android:layout_alignTop="@+id/fabIncorrect"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_weight="3"
+        android:gravity="left">
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/fabIncorrect"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/fab_incorrect"
+            android:layout_margin="15dp"/>
+
+        <Space
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/fabCorrect"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/fab_correct"
+            android:layout_margin="15dp"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>
