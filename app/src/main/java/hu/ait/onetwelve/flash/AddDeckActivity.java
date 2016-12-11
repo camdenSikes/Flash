@@ -17,8 +17,6 @@ import butterknife.OnClick;
 import hu.ait.onetwelve.flash.adapter.AddedCardsAdapter;
 import hu.ait.onetwelve.flash.model.Deck;
 
-import static android.R.attr.onClick;
-
 public class AddDeckActivity extends BaseActivity {
 
     @BindView(R.id.etTitle)
@@ -41,8 +39,10 @@ public class AddDeckActivity extends BaseActivity {
                 new LinearLayoutManager(this);
         recyclerAddedCards.setLayoutManager(mLayoutManager);
         //TODO: If edit button was pressed, set title and call other adapter constructor
-        addedCardsAdapter = new AddedCardsAdapter();
+        addedCardsAdapter = new AddedCardsAdapter(this);
         recyclerAddedCards.setAdapter(addedCardsAdapter);
+        etCardFront.setText("hi");
+        etCardBack.setText("you");
     }
 
 
@@ -76,16 +76,16 @@ public class AddDeckActivity extends BaseActivity {
     private boolean isAddFormValid() {
         boolean result = true;
         if (TextUtils.isEmpty(etCardFront.getText().toString())) {
-            etTitle.setError("Required");
+            etCardFront.setError("Required");
             result = false;
         } else {
-            etTitle.setError(null);
+            etCardFront.setError(null);
         }
-        if (TextUtils.isEmpty(etTitle.getText().toString())) {
-            etTitle.setError("Required");
+        if (TextUtils.isEmpty(etCardBack.getText().toString())) {
+            etCardBack.setError("Required");
             result = false;
         } else {
-            etTitle.setError(null);
+            etCardBack.setError(null);
         }
         return result;
     }
@@ -98,5 +98,13 @@ public class AddDeckActivity extends BaseActivity {
             etTitle.setError(null);
             return true;
         }
+    }
+
+    public void setCardFrontText(String cardFrontText) {
+        etCardFront.setText(cardFrontText);
+    }
+
+    public void setCardBackText(String cardBackText) {
+        etCardBack.setText(cardBackText);
     }
 }
