@@ -37,7 +37,6 @@ public class AddedCardsAdapter extends RecyclerView.Adapter<AddedCardsAdapter.Vi
     public AddedCardsAdapter(){
         frontList = new ArrayList<>();
         backList = new ArrayList<>();
-        //TODO: if editing, add existing cards
     }
 
     public AddedCardsAdapter(List<String> frontList, List<String> backList){

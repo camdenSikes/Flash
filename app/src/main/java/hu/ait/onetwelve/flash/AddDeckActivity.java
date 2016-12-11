@@ -40,8 +40,8 @@ public class AddDeckActivity extends BaseActivity {
         final LinearLayoutManager mLayoutManager =
                 new LinearLayoutManager(this);
         recyclerAddedCards.setLayoutManager(mLayoutManager);
+        //TODO: If edit button was pressed, set title and call other adapter constructor
         addedCardsAdapter = new AddedCardsAdapter();
-
         recyclerAddedCards.setAdapter(addedCardsAdapter);
     }
 
@@ -60,6 +60,7 @@ public class AddDeckActivity extends BaseActivity {
             return;
         }
 
+        //TODO: Maybe have to do something different when editing
         String key = FirebaseDatabase.getInstance().getReference().child("deck").push().getKey();
         Deck newDeck = new Deck(getUid(), getUserName(),
                 etTitle.getText().toString(), addedCardsAdapter.getFrontList(),
