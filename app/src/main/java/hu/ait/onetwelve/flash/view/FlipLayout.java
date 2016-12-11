@@ -13,7 +13,7 @@ import android.widget.FrameLayout;
 
 public class FlipLayout extends FrameLayout
     implements Animation.AnimationListener, View.OnClickListener, OnSwipeListener {
-  public static final int ANIM_DURATION_MILLIS = 500;
+  public static final int ANIM_DURATION_MILLIS = 300;
   private static final Interpolator fDefaultInterpolator = new DecelerateInterpolator();
   private OnFlipListener listener;
   private FlipAnimator animator;

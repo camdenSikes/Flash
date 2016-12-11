@@ -20,4 +20,6 @@
     <string name="delete">Delete</string>
     <string name="deck_edited">Deck edited</string>
     <string name="deck_created">Deck created</string>
+    <string name="score_completion">"You scored "</string>
+    <string name="cool_thanks">Cool, thanks!</string>
 </resources>
