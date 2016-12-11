@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import hu.ait.onetwelve.flash.MainActivity;
 import hu.ait.onetwelve.flash.R;
@@ -49,30 +51,19 @@ public class MyDecksFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        decksAdapter.notifyDataSetChanged();
+    }
+
     private void initDecksListener() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("deck");
-        ref.orderByKey().addChildEventListener(new ChildEventListener() {
+
+        ref.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Deck newDeck = dataSnapshot.getValue(Deck.class);
-                if(uid.equals(newDeck.getUid())) {
-                    decksAdapter.addDeck(newDeck, dataSnapshot.getKey());
-                }
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                decksAdapter.updateDecks(uid, dataSnapshot, true);
             }
 
             @Override
@@ -80,5 +71,9 @@ public class MyDecksFragment extends Fragment {
 
             }
         });
+    }
+
+    public DecksAdapter getDecksAdapter() {
+        return decksAdapter;
     }
 }

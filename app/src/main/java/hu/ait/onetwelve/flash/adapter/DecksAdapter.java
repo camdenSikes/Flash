@@ -3,6 +3,7 @@ package hu.ait.onetwelve.flash.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +12,12 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +27,7 @@ import butterknife.ButterKnife;
 import hu.ait.onetwelve.flash.AddDeckActivity;
 import hu.ait.onetwelve.flash.MainActivity;
 import hu.ait.onetwelve.flash.R;
+import hu.ait.onetwelve.flash.ViewCardsActivity;
 import hu.ait.onetwelve.flash.model.Deck;
 
 /**
@@ -29,6 +35,7 @@ import hu.ait.onetwelve.flash.model.Deck;
  */
 
 public class DecksAdapter extends RecyclerView.Adapter<DecksAdapter.ViewHolder> {
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -53,6 +60,7 @@ public class DecksAdapter extends RecyclerView.Adapter<DecksAdapter.ViewHolder> 
     private String uId;
     private int lastPosition = -1;
     private DatabaseReference decksRef;
+    private DataSnapshot dataSnap;
 
     public DecksAdapter(Context context, String uId) {
         this.context = context;
@@ -61,6 +69,18 @@ public class DecksAdapter extends RecyclerView.Adapter<DecksAdapter.ViewHolder> 
         this.deckKeys = new ArrayList<String>();
 
         decksRef = FirebaseDatabase.getInstance().getReference("deck");
+        decksRef.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                dataSnap = dataSnapshot;
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
@@ -134,5 +154,28 @@ public class DecksAdapter extends RecyclerView.Adapter<DecksAdapter.ViewHolder> 
             viewToAnimate.startAnimation(animation);
             lastPosition = position;
         }
+    }
+
+    public void updateDecks(String uid, DataSnapshot dataSnapshot, boolean myDecks){
+        deckKeys.clear();
+        deckList.clear();
+        notifyDataSetChanged();
+        for (DataSnapshot deckSnapshot : dataSnapshot.getChildren()) {
+            String key = deckSnapshot.getKey();
+            Deck deck = deckSnapshot.getValue(Deck.class);
+            if(myDecks) {
+                if (uid.equals(deck.getUid())) {
+                    Log.d("HELP", "THIS HAPPENED");
+                    deckKeys.add(key);
+                    deckList.add(deck);
+                }
+            }else{
+                if (!uid.equals(deck.getUid())) {
+                    deckKeys.add(key);
+                    deckList.add(deck);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 }
