@@ -1,7 +1,9 @@
 package hu.ait.onetwelve.flash.adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -43,10 +45,12 @@ public class DecksAdapter extends RecyclerView.Adapter<DecksAdapter.ViewHolder> 
         TextView tvAuthor;
         @BindView(R.id.tvTitle)
         TextView tvTitle;
-        @BindView(R.id.btnViewCards)
-        Button btnViewCards;
+        @BindView(R.id.btnDelete)
+        Button btnDelete;
         @BindView(R.id.btnEdit)
         Button btnEdit;
+        @BindView(R.id.card_view)
+        View cardView;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -96,12 +100,47 @@ public class DecksAdapter extends RecyclerView.Adapter<DecksAdapter.ViewHolder> 
         Deck tmpDeck = deckList.get(position);
         holder.tvAuthor.setText(tmpDeck.getAuthor());
         holder.tvTitle.setText(tmpDeck.getTitle());
-        holder.btnViewCards.setOnClickListener(new View.OnClickListener() {
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, ViewCardsActivity.class);
-                intent.putExtra(MainActivity.KEY_DECK,deckList.get(position));
-                context.startActivity(intent);
+                if(deckList.get(position).getFronts() != null) {
+                    Intent intent = new Intent(context, ViewCardsActivity.class);
+                    intent.putExtra(MainActivity.KEY_DECK, deckList.get(position));
+                    context.startActivity(intent);
+                }else{
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setMessage("This deck contains no cards")
+                            .setCancelable(false)
+                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                }
+            }
+        });
+
+        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setMessage("Are you sure you want to delete this deck?")
+                        .setCancelable(false)
+                        .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                removeDeck(position);
+                                dialog.dismiss();
+                            }
+                        })
+                        .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.dismiss();
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
             }
         });
 

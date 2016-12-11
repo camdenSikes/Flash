@@ -10,7 +10,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_deck_card">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -19,7 +20,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_margin="20dp">
 
             <TextView
                 android:id="@+id/tvAuthor"
@@ -51,10 +53,10 @@
                 android:visibility="gone"/>
 
             <Button
-                android:id="@+id/btnViewCards"
+                android:id="@+id/btnDelete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/view"/>
+                android:text="@string/delete"/>
 
         </LinearLayout>
 
