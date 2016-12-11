@@ -105,11 +105,11 @@ public class DecksAdapter extends RecyclerView.Adapter<DecksAdapter.ViewHolder> 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(deckList.get(position).getFronts() != null) {
+                if (deckList.get(position).getFronts() != null) {
                     Intent intent = new Intent(context, ViewCardsActivity.class);
                     intent.putExtra(MainActivity.KEY_DECK, deckList.get(position));
                     context.startActivity(intent);
-                }else{
+                } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setMessage("This deck contains no cards")
                             .setCancelable(false)
@@ -124,8 +124,10 @@ public class DecksAdapter extends RecyclerView.Adapter<DecksAdapter.ViewHolder> 
             }
         });
 
-        if(uId.equals(tmpDeck.getUid())) {
+        if (uId.equals(tmpDeck.getUid())) {
             holder.deckButtonLayout.setVisibility(View.VISIBLE);
+        }else{
+            holder.deckButtonLayout.setVisibility(View.GONE);
         }
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,13 +182,10 @@ public class DecksAdapter extends RecyclerView.Adapter<DecksAdapter.ViewHolder> 
         notifyItemRemoved(index);
     }
 
-    public void removeDeckByKey(String key) {
-        int index = deckKeys.indexOf(key);
-        if (index != -1) {
-            deckList.remove(index);
-            deckKeys.remove(index);
-            notifyItemRemoved(index);
-        }
+    public void clear(){
+        deckList.clear();
+        deckKeys.clear();
+        notifyDataSetChanged();
     }
 
     private void setAnimation(View viewToAnimate, int position) {
@@ -197,25 +196,45 @@ public class DecksAdapter extends RecyclerView.Adapter<DecksAdapter.ViewHolder> 
         }
     }
 
-    public void updateDecks(String uid, DataSnapshot dataSnapshot, boolean myDecks){
+    public void updateMyDecks(String uid, DataSnapshot dataSnapshot) {
         deckKeys.clear();
         deckList.clear();
         notifyDataSetChanged();
         for (DataSnapshot deckSnapshot : dataSnapshot.getChildren()) {
             String key = deckSnapshot.getKey();
             Deck deck = deckSnapshot.getValue(Deck.class);
-            if(myDecks) {
-                if (uid.equals(deck.getUid())) {
-                    Log.d("HELP", "THIS HAPPENED");
-                    deckKeys.add(key);
-                    deckList.add(deck);
-                }
-            }else{
-                if (!uid.equals(deck.getUid())) {
-                    deckKeys.add(key);
-                    deckList.add(deck);
-                }
+            if (uid.equals(deck.getUid())) {
+                deckKeys.add(key);
+                deckList.add(deck);
             }
+        }
+        notifyDataSetChanged();
+    }
+
+    public void updateSharedDecks(String uid, DataSnapshot dataSnapshot) {
+        deckKeys.clear();
+        deckList.clear();
+        notifyDataSetChanged();
+        for (DataSnapshot deckSnapshot : dataSnapshot.getChildren()) {
+            String key = deckSnapshot.getKey();
+            Deck deck = deckSnapshot.getValue(Deck.class);
+            if (!uid.equals(deck.getUid())) {
+                deckKeys.add(key);
+                deckList.add(deck);
+            }
+        }
+        notifyDataSetChanged();
+    }
+
+    public void updateDecks(DataSnapshot dataSnapshot) {
+        deckKeys.clear();
+        deckList.clear();
+        notifyDataSetChanged();
+        for (DataSnapshot deckSnapshot : dataSnapshot.getChildren()) {
+            String key = deckSnapshot.getKey();
+            Deck deck = deckSnapshot.getValue(Deck.class);
+            deckKeys.add(key);
+            deckList.add(deck);
         }
         notifyDataSetChanged();
     }

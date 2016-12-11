@@ -51,19 +51,13 @@ public class MyDecksFragment extends Fragment {
         return rootView;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        decksAdapter.notifyDataSetChanged();
-    }
-
     private void initDecksListener() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("deck");
 
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                decksAdapter.updateDecks(uid, dataSnapshot, true);
+                decksAdapter.updateMyDecks(uid, dataSnapshot);
             }
 
             @Override
