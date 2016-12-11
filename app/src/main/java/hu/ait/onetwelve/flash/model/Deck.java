@@ -2,6 +2,7 @@ package hu.ait.onetwelve.flash.model;
 
 import com.google.firebase.database.Exclude;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +11,7 @@ import java.util.Map;
  * Created by Camden Sikes on 12/10/2016.
  */
 
-public class Deck {
+public class Deck implements Serializable{
 
     private String uid;
     private String author;

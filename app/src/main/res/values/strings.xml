@@ -12,4 +12,6 @@
     <string name="add_deck">Add Deck</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
+    <string name="deck_edited">Deck edited</string>
+    <string name="deck_created">Deck created</string>
 </resources>

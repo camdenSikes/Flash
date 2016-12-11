@@ -1,6 +1,7 @@
 package hu.ait.onetwelve.flash.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import hu.ait.onetwelve.flash.AddDeckActivity;
+import hu.ait.onetwelve.flash.MainActivity;
 import hu.ait.onetwelve.flash.R;
 import hu.ait.onetwelve.flash.model.Deck;
 
@@ -69,14 +72,16 @@ public class DecksAdapter extends RecyclerView.Adapter<DecksAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         Deck tmpDeck = deckList.get(position);
         holder.tvAuthor.setText(tmpDeck.getAuthor());
         holder.tvTitle.setText(tmpDeck.getTitle());
         holder.btnViewCards.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: Show deck view
+                Intent intent = new Intent(context, ViewCardsActivity.class);
+                intent.putExtra(MainActivity.KEY_DECK,deckList.get(position));
+                context.startActivity(intent);
             }
         });
 
@@ -86,7 +91,10 @@ public class DecksAdapter extends RecyclerView.Adapter<DecksAdapter.ViewHolder> 
         holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: edit deck
+                Intent intent = new Intent(context, AddDeckActivity.class);
+                intent.putExtra(MainActivity.KEY_KEY, deckKeys.get(position));
+                intent.putExtra(MainActivity.KEY_DECK, deckList.get(position));
+                ((MainActivity) context).startActivity(intent);
             }
         });
 

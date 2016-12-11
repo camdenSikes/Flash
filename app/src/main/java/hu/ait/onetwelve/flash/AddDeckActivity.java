@@ -1,5 +1,6 @@
 package hu.ait.onetwelve.flash;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -29,6 +30,7 @@ public class AddDeckActivity extends BaseActivity {
 
     RecyclerView recyclerAddedCards;
     AddedCardsAdapter addedCardsAdapter;
+    private Bundle bd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +40,19 @@ public class AddDeckActivity extends BaseActivity {
         final LinearLayoutManager mLayoutManager =
                 new LinearLayoutManager(this);
         recyclerAddedCards.setLayoutManager(mLayoutManager);
-        //TODO: If edit button was pressed, set title and call other adapter constructor
-        addedCardsAdapter = new AddedCardsAdapter(this);
+
+        Intent intent = getIntent();
+        bd = intent.getExtras();
+        if(bd != null) {
+            Deck editDeck = (Deck) bd.get(MainActivity.KEY_DECK);
+            etTitle.setText(editDeck.getTitle());
+            addedCardsAdapter = new AddedCardsAdapter(this, editDeck.getFronts(), editDeck.getBacks());
+
+
+        }else {
+            addedCardsAdapter = new AddedCardsAdapter(this);
+        }
         recyclerAddedCards.setAdapter(addedCardsAdapter);
-        etCardFront.setText("hi");
-        etCardBack.setText("you");
     }
 
 
@@ -52,6 +62,8 @@ public class AddDeckActivity extends BaseActivity {
             return;
         }
         addedCardsAdapter.addCard(etCardFront.getText().toString(),etCardBack.getText().toString());
+        etCardFront.getText().clear();
+        etCardBack.getText().clear();
     }
 
     @OnClick(R.id.btnSend)
@@ -60,15 +72,23 @@ public class AddDeckActivity extends BaseActivity {
             return;
         }
 
-        //TODO: Maybe have to do something different when editing
-        String key = FirebaseDatabase.getInstance().getReference().child("deck").push().getKey();
+        String key;
+        String message;
+        if(bd != null){
+            key = (String) bd.get(MainActivity.KEY_KEY);
+            message = getString(R.string.deck_edited);
+        }
+        else {
+            key = FirebaseDatabase.getInstance().getReference().child("deck").push().getKey();
+            message = getString(R.string.deck_created);
+        }
         Deck newDeck = new Deck(getUid(), getUserName(),
                 etTitle.getText().toString(), addedCardsAdapter.getFrontList(),
                 addedCardsAdapter.getBackList());
 
         FirebaseDatabase.getInstance().getReference().child("deck").child(key).setValue(newDeck);
 
-        Toast.makeText(this, "Deck created", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 
         finish();
     }

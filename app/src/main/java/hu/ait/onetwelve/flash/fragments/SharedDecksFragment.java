@@ -35,7 +35,7 @@ public class SharedDecksFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_deck_list, null);
         uid = ((MainActivity) container.getContext()).getUid();
 
-        decksAdapter = new DecksAdapter(container.getContext().getApplicationContext(), uid);
+        decksAdapter = new DecksAdapter(container.getContext(), uid);
         RecyclerView recyclerViewPlaces = (RecyclerView) rootView.findViewById(
                 R.id.recyclerSharedDecks);
         LinearLayoutManager layoutManager = new LinearLayoutManager(container.getContext());

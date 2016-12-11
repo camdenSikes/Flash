@@ -52,9 +52,18 @@ public class AddedCardsAdapter extends RecyclerView.Adapter<AddedCardsAdapter.Vi
         this.context = context;
     }
 
-    public AddedCardsAdapter(List<String> frontList, List<String> backList){
-        this.frontList = frontList;
-        this.backList = backList;
+    public AddedCardsAdapter(Context context, List<String> frontList, List<String> backList){
+        this.context = context;
+        if(frontList != null){
+            this.frontList = frontList;
+        }else {
+            this.frontList = new ArrayList<>();
+        }
+        if(backList != null){
+            this.backList = backList;
+        }else {
+            this.backList = new ArrayList<>();
+        }
     }
 
     @Override

@@ -18,9 +18,10 @@ import hu.ait.onetwelve.flash.adapter.MainPagerAdapter;
 
 public class MainActivity extends BaseActivity {
 
+    public static final String KEY_KEY = "KEY_KEY";
+    public static final String KEY_DECK = "KEY_DECK";
 
     private MainPagerAdapter mPagerAdapter;
-
 
     private ViewPager mViewPager;
 
