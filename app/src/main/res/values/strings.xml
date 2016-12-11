@@ -22,4 +22,5 @@
     <string name="deck_created">Deck created</string>
     <string name="score_completion">"You scored "</string>
     <string name="cool_thanks">Cool, thanks!</string>
+    <string name="search">Search</string>
 </resources>

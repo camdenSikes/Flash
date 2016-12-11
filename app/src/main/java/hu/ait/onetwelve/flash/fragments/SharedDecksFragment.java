@@ -57,7 +57,7 @@ public class SharedDecksFragment extends Fragment {
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                decksAdapter.updateDecks(uid, dataSnapshot, false);
+                decksAdapter.updateSharedDecks(uid, dataSnapshot);
             }
 
             @Override

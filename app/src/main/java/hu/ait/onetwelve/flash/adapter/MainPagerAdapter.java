@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import hu.ait.onetwelve.flash.fragments.MyDecksFragment;
-import hu.ait.onetwelve.flash.fragments.OtherFragment;
+import hu.ait.onetwelve.flash.fragments.SearchFragment;
 import hu.ait.onetwelve.flash.fragments.SharedDecksFragment;
 
 /**
@@ -27,7 +27,7 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
             case 1:
                 return new SharedDecksFragment();
             case 2:
-                return new OtherFragment();
+                return new SearchFragment();
             default:
                 return new MyDecksFragment();
         }
@@ -47,7 +47,7 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
             case 1:
                 return "Shared Decks";
             case 2:
-                return "SECTION 3";
+                return "Search";
             default:
                 return "My Decks";
         }
