@@ -23,4 +23,7 @@
     <string name="score_completion">"You scored "</string>
     <string name="cool_thanks">Cool, thanks!</string>
     <string name="search">Search</string>
+    <string name="my_decks">My Decks</string>
+    <string name="shared_decks">Shared</string>
+    <string name="search_decks">Search</string>
 </resources>

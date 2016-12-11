@@ -34,7 +34,7 @@ public class MainActivity extends BaseActivity {
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        mPagerAdapter = new MainPagerAdapter(getSupportFragmentManager());
+        mPagerAdapter = new MainPagerAdapter(getSupportFragmentManager(), this);
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
