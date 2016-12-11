@@ -15,11 +15,13 @@ import android.view.View;
 
 import hu.ait.onetwelve.flash.R;
 import hu.ait.onetwelve.flash.adapter.MainPagerAdapter;
+import hu.ait.onetwelve.flash.fragments.MyDecksFragment;
 
 public class MainActivity extends BaseActivity {
 
     public static final String KEY_KEY = "KEY_KEY";
     public static final String KEY_DECK = "KEY_DECK";
+    public static final int EDIT_DECK = 101;
 
     private MainPagerAdapter mPagerAdapter;
 
@@ -52,7 +54,6 @@ public class MainActivity extends BaseActivity {
         });
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

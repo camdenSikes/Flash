@@ -18,6 +18,6 @@
     <string name="flip_animation">Flip animation</string>
     <string name="KEY_DECK">KEY_DECK</string>
     <string name="delete">Delete</string>
-    <string name="deck_created">Deck Created</string>
-    <string name="deck_edited">Deck Edited</string>
+    <string name="deck_edited">Deck edited</string>
+    <string name="deck_created">Deck created</string>
 </resources>
