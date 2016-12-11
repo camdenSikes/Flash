@@ -31,13 +31,18 @@ public class AddedCardsAdapter extends RecyclerView.Adapter<AddedCardsAdapter.Vi
         }
     }
 
-    List<String> frontList;
-    List<String> backList;
+    private List<String> frontList;
+    private List<String> backList;
 
     public AddedCardsAdapter(){
         frontList = new ArrayList<>();
         backList = new ArrayList<>();
         //TODO: if editing, add existing cards
+    }
+
+    public AddedCardsAdapter(List<String> frontList, List<String> backList){
+        this.frontList = frontList;
+        this.backList = backList;
     }
 
     @Override
