@@ -11,7 +11,11 @@
     <string name="title">Title</string>
     <string name="add_deck">Add Deck</string>
     <string name="edit">Edit</string>
+
+    <string name="front">Front side</string>
+    <string name="back">Back side</string>
+    <string name="animations">Animations</string>
+    <string name="flip_animation">Flip animation</string>
+    <string name="KEY_DECK">KEY_DECK</string>
     <string name="delete">Delete</string>
-    <string name="deck_edited">Deck edited</string>
-    <string name="deck_created">Deck created</string>
 </resources>
