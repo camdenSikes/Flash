@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -71,8 +69,8 @@ public class DecksAdapter extends RecyclerView.Adapter<DecksAdapter.ViewHolder> 
     public DecksAdapter(Context context, String uId) {
         this.context = context;
         this.uId = uId;
-        this.deckList = new ArrayList<Deck>();
-        this.deckKeys = new ArrayList<String>();
+        this.deckList = new ArrayList<>();
+        this.deckKeys = new ArrayList<>();
 
         decksRef = FirebaseDatabase.getInstance().getReference("deck");
         decksRef.addValueEventListener(new ValueEventListener() {
@@ -93,8 +91,7 @@ public class DecksAdapter extends RecyclerView.Adapter<DecksAdapter.ViewHolder> 
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.row_deck, parent, false);
-        ViewHolder vh = new ViewHolder(v);
-        return vh;
+        return new ViewHolder(v);
     }
 
     @Override
@@ -157,7 +154,7 @@ public class DecksAdapter extends RecyclerView.Adapter<DecksAdapter.ViewHolder> 
                 Intent intent = new Intent(context, AddDeckActivity.class);
                 intent.putExtra(MainActivity.KEY_KEY, deckKeys.get(position));
                 intent.putExtra(MainActivity.KEY_DECK, deckList.get(position));
-                ((MainActivity) context).startActivity(intent);
+                context.startActivity(intent);
             }
         });
 
