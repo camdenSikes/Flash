@@ -27,7 +27,6 @@ public class ViewCardsActivity extends AppCompatActivity {
     private FlipLayout flipLayout;
 
     private int score;
-    private boolean complete;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,8 +39,6 @@ public class ViewCardsActivity extends AppCompatActivity {
         score = 0;
 
         if(ViewCardsData.getInstance().isComplete()) {
-            setContentView(R.layout.completion_screen);
-            score = ViewCardsData.getInstance().getScore();
             showCompleteMessage();
         }
         else {
@@ -107,6 +104,7 @@ public class ViewCardsActivity extends AppCompatActivity {
     }
 
     private void showCompleteMessage() {
+        setContentView(R.layout.completion_screen);
         TextView tvCompletion = (TextView) findViewById(R.id.tvCompletion);
         tvCompletion.setText(getString(R.string.score_completion)+
                 score+"/"+deck.getFronts().size());
