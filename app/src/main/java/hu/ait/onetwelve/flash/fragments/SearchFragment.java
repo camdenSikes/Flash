@@ -1,5 +1,6 @@
 package hu.ait.onetwelve.flash.fragments;
 
+        import android.content.Context;
         import android.os.Bundle;
         import android.support.annotation.Nullable;
         import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ package hu.ait.onetwelve.flash.fragments;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
+        import android.view.inputmethod.InputMethodManager;
         import android.widget.Button;
         import android.widget.EditText;
 
@@ -76,6 +78,10 @@ public class SearchFragment extends Fragment {
         if(!isSearchValid()){
             return;
         }
+
+        InputMethodManager mgr = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        mgr.hideSoftInputFromWindow(etSearch.getWindowToken(), 0);
+
         query = etSearch.getText().toString();
         orderDecks(snapshot);
     }
