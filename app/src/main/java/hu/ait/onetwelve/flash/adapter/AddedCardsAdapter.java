@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -111,10 +112,12 @@ public class AddedCardsAdapter extends RecyclerView.Adapter<AddedCardsAdapter.Vi
     }
 
     public List<String> getFrontList() {
+        Collections.reverse(frontList);
         return frontList;
     }
 
     public List<String> getBackList() {
+        Collections.reverse(backList);
         return backList;
     }
 }
