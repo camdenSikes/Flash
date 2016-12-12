@@ -30,10 +30,6 @@ import hu.ait.onetwelve.flash.R;
 import hu.ait.onetwelve.flash.ViewCardsActivity;
 import hu.ait.onetwelve.flash.model.Deck;
 
-/**
- * Created by Camden Sikes on 12/10/2016.
- */
-
 public class DecksAdapter extends RecyclerView.Adapter<DecksAdapter.ViewHolder> {
 
 

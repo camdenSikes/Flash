@@ -11,6 +11,9 @@ import android.view.animation.Interpolator;
 import android.view.animation.Transformation;
 import android.widget.FrameLayout;
 
+// Written by 4xes
+// https://github.com/4xes/FlipAnimation
+
 public class FlipLayout extends FrameLayout
     implements Animation.AnimationListener, View.OnClickListener, OnSwipeListener {
   public static final int ANIM_DURATION_MILLIS = 300;

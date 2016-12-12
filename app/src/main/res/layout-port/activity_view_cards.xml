@@ -31,7 +31,6 @@
 
     </LinearLayout>
 
-
     <hu.ait.onetwelve.flash.view.FlipLayout
         android:id="@+id/flipCards"
         android:layout_width="match_parent"

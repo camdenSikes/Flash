@@ -1,6 +1,6 @@
 package hu.ait.onetwelve.flash.fragments;
 
-        import android.content.Context;
+import android.content.Context;
         import android.os.Bundle;
         import android.support.annotation.Nullable;
         import android.support.v4.app.Fragment;
@@ -8,12 +8,10 @@ package hu.ait.onetwelve.flash.fragments;
         import android.support.v7.widget.LinearLayoutManager;
         import android.support.v7.widget.RecyclerView;
         import android.text.TextUtils;
-        import android.util.Log;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
         import android.view.inputmethod.InputMethodManager;
-        import android.widget.Button;
         import android.widget.EditText;
 
         import com.google.firebase.database.DataSnapshot;
@@ -35,10 +33,6 @@ package hu.ait.onetwelve.flash.fragments;
         import hu.ait.onetwelve.flash.model.Deck;
         import hu.ait.onetwelve.flash.stringsimilarity.ComparePairs;
         import hu.ait.onetwelve.flash.stringsimilarity.LongestCommonSubsequence;
-
-/**
- * Created by Camden Sikes on 12/10/2016.
- */
 
 public class SearchFragment extends Fragment {
     private DecksAdapter decksAdapter;
@@ -129,9 +123,5 @@ public class SearchFragment extends Fragment {
             String key = pair.second.getKey();
             decksAdapter.addDeck(deck,key);
         }
-    }
-
-    public DecksAdapter getDecksAdapter() {
-        return decksAdapter;
     }
 }

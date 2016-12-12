@@ -11,6 +11,9 @@ import android.view.View.OnTouchListener;
 import java.util.ArrayList;
 import java.util.List;
 
+// Written by 4xes
+// https://github.com/4xes/FlipAnimation
+
 public class OnSwipeTouchListener implements OnTouchListener {
 
   private final GestureDetector gestureDetector;

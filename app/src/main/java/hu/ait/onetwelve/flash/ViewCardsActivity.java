@@ -12,11 +12,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import hu.ait.onetwelve.flash.model.Deck;
+import hu.ait.onetwelve.flash.model.ViewCardsData;
 import hu.ait.onetwelve.flash.view.FlipLayout;
-
-/**
- * Created by Brendan on 12/11/16.
- */
 
 public class ViewCardsActivity extends AppCompatActivity {
     private Deck deck;
@@ -32,6 +29,10 @@ public class ViewCardsActivity extends AppCompatActivity {
     TextView tvDeckPosition;
     @BindView(R.id.flipCards)
     FlipLayout flipLayout;
+    @BindView(R.id.fabCorrect)
+    Button fabCorrect;
+    @BindView(R.id.fabIncorrect)
+    Button fabIncorrect;
 
     private int score;
 
@@ -42,27 +43,30 @@ public class ViewCardsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle bd = intent.getExtras();
         deck = (Deck) bd.get(MainActivity.KEY_DECK);
-        listPos = 0;
-        score = 0;
+
+        listPos = ViewCardsData.getInstance().getListPos();
+        score = ViewCardsData.getInstance().getScore();
 
         if(ViewCardsData.getInstance().isComplete()) {
             showCompleteMessage();
         }
         else {
             setupFlipViews();
-        }
-
-        if(ViewCardsData.getInstance().getListPos() != 0) {
-            listPos = ViewCardsData.getInstance().getListPos();
-        }
-
-        if(ViewCardsData.getInstance().getScore() != 0) {
-            score = ViewCardsData.getInstance().getScore();
-        }
-
-        if (!ViewCardsData.getInstance().isComplete()) {
             updateCardInfo();
         }
+
+        flipLayout.setOnFlipListener(new FlipLayout.OnFlipListener() {
+            @Override
+            public void onFlipStart(FlipLayout view) {
+
+            }
+
+            @Override
+            public void onFlipEnd(FlipLayout view) {
+                fabCorrect.setVisibility(View.VISIBLE);
+                fabIncorrect.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     private void setupFlipViews() {
@@ -74,7 +78,7 @@ public class ViewCardsActivity extends AppCompatActivity {
     @OnClick(R.id.fabCorrect)
     void Correct(){
         score++;
-        ViewCardsData.getInstance().setScore(score);
+        ViewCardsData.getInstance().incrementScore();
         flipLayout.reset();
         nextItem();
     }
@@ -94,7 +98,7 @@ public class ViewCardsActivity extends AppCompatActivity {
         }
         else {
             listPos++;
-            ViewCardsData.getInstance().setListPos(listPos);
+            ViewCardsData.getInstance().incrementListPos();
             updateCardInfo();
         }
     }
@@ -122,5 +126,7 @@ public class ViewCardsActivity extends AppCompatActivity {
         tvDeckPosition.setText(Integer.toString(listPos+1)+" / "+deck.getFronts().size());
         tvFront.setText(front);
         tvBack.setText(back);
+        fabCorrect.setVisibility(View.INVISIBLE);
+        fabIncorrect.setVisibility(View.INVISIBLE);
     }
 }

@@ -6,10 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-/**
- * Created by Camden Sikes on 11/14/2016.
- */
-
 public class BaseActivity extends AppCompatActivity {
 
     private ProgressDialog progressDialog;
@@ -17,7 +13,8 @@ public class BaseActivity extends AppCompatActivity {
     public void showProgressDialog() {
         if (progressDialog == null) {
             progressDialog = new ProgressDialog(this);
-            //progressDialog.setCancelable(false);
+            progressDialog.setCancelable(false);
+            progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.setMessage("Loading...");
         }
 

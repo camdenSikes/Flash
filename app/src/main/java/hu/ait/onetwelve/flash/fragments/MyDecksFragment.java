@@ -5,12 +5,10 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,11 +18,6 @@ import com.google.firebase.database.ValueEventListener;
 import hu.ait.onetwelve.flash.MainActivity;
 import hu.ait.onetwelve.flash.R;
 import hu.ait.onetwelve.flash.adapter.DecksAdapter;
-import hu.ait.onetwelve.flash.model.Deck;
-
-/**
- * Created by Camden Sikes on 12/10/2016.
- */
 
 public class MyDecksFragment extends Fragment {
     private DecksAdapter decksAdapter;
@@ -65,9 +58,5 @@ public class MyDecksFragment extends Fragment {
 
             }
         });
-    }
-
-    public DecksAdapter getDecksAdapter() {
-        return decksAdapter;
     }
 }
