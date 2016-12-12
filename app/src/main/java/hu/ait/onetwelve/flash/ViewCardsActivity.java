@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import hu.ait.onetwelve.flash.model.Deck;
 import hu.ait.onetwelve.flash.view.FlipLayout;
 
@@ -17,14 +20,18 @@ import hu.ait.onetwelve.flash.view.FlipLayout;
 
 public class ViewCardsActivity extends AppCompatActivity {
     private Deck deck;
-    private TextView tvFront;
-    private TextView tvBack;
-    private Button fabCorrect;
-    private Button fabIncorrect;
     private int listPos;
-    private TextView tvDeckHeader;
-    private TextView tvDeckPosition;
-    private FlipLayout flipLayout;
+
+    @BindView(R.id.tvFront)
+    TextView tvFront;
+    @BindView(R.id.tvBack)
+    TextView tvBack;
+    @BindView(R.id.tvDeckHeader)
+    TextView tvDeckHeader;
+    @BindView(R.id.tvDeckPosition)
+    TextView tvDeckPosition;
+    @BindView(R.id.flipCards)
+    FlipLayout flipLayout;
 
     private int score;
 
@@ -60,33 +67,22 @@ public class ViewCardsActivity extends AppCompatActivity {
 
     private void setupFlipViews() {
         setContentView(R.layout.activity_view_cards);
-        tvBack = (TextView) findViewById(R.id.tvBack);
-        tvFront = (TextView) findViewById(R.id.tvFront);
-        fabCorrect = (Button) findViewById(R.id.fabCorrect);
-        fabIncorrect = (Button) findViewById(R.id.fabIncorrect);
+        ButterKnife.bind(this);
+        tvDeckHeader.setText(deck.getTitle()+" by "+deck.getAuthor());
+    }
 
-        fabCorrect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                score++;
-                ViewCardsData.getInstance().setScore(score);
-                flipLayout.reset();
-                nextItem();
-            }
-        });
+    @OnClick(R.id.fabCorrect)
+    void Correct(){
+        score++;
+        ViewCardsData.getInstance().setScore(score);
+        flipLayout.reset();
+        nextItem();
+    }
 
-        fabIncorrect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                flipLayout.reset();
-                nextItem();
-            }
-        });
-
-        tvDeckHeader = (TextView) findViewById(R.id.tvDeckHeader);
-        tvDeckHeader.setText(deck.getTitle().toString()+" by "+deck.getAuthor().toString());
-        tvDeckPosition = (TextView) findViewById(R.id.tvDeckPosition);
-        flipLayout = (FlipLayout) findViewById(R.id.flipCards);
+    @OnClick(R.id.fabIncorrect)
+    void Incorrect(){
+        flipLayout.reset();
+        nextItem();
     }
 
     public void nextItem() {
