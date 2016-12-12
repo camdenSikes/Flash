@@ -20,13 +20,12 @@ import hu.ait.onetwelve.flash.view.FlipLayout;
 
 public class ViewCardsActivity extends AppCompatActivity {
     private Deck deck;
+    private int listPos;
+
     @BindView(R.id.tvFront)
     TextView tvFront;
     @BindView(R.id.tvBack)
     TextView tvBack;
-    private Button fabCorrect;
-    private Button fabIncorrect;
-    private int listPos;
     @BindView(R.id.tvDeckHeader)
     TextView tvDeckHeader;
     @BindView(R.id.tvDeckPosition)
