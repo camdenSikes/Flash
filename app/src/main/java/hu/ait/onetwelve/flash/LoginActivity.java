@@ -40,6 +40,9 @@ public class LoginActivity extends BaseActivity {
 
         database = FirebaseDatabase.getInstance().getReference();
         firebaseAuth = FirebaseAuth.getInstance();
+        if(firebaseAuth.getCurrentUser()!=null){
+            etEmail.setText(firebaseAuth.getCurrentUser().getEmail());
+        }
     }
 
     @OnClick(R.id.btnRegister)
