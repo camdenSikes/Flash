@@ -29,7 +29,7 @@
         <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
         <item name="android:layout_marginBottom">@dimen/middle</item>
         <item name="android:layout_gravity">center_horizontal</item>
-        <item name="android:padding">50dp</item>
+        <item name="android:padding">20dp</item>
     </style>
 
     <style name="Side.Front">
