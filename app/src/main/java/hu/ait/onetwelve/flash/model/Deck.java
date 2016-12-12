@@ -1,15 +1,7 @@
 package hu.ait.onetwelve.flash.model;
 
-import com.google.firebase.database.Exclude;
-
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-/**
- * Created by Camden Sikes on 12/10/2016.
- */
 
 public class Deck implements Serializable{
 
@@ -29,32 +21,12 @@ public class Deck implements Serializable{
         this.backs = backs;
     }
 
-    @Exclude
-    public Map<String, Object> toMap() {
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("uid", uid);
-        result.put("author", author);
-        result.put("title", title);
-        result.put("fronts", fronts);
-        result.put("backs", backs);
-
-        return result;
-    }
-
     public String getUid() {
         return uid;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
-
     public String getAuthor() {
         return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
     }
 
     public String getTitle() {
@@ -69,15 +41,9 @@ public class Deck implements Serializable{
         return fronts;
     }
 
-    public void setFronts(List<String> fronts) {
-        this.fronts = fronts;
-    }
 
     public List<String> getBacks() {
         return backs;
     }
 
-    public void setBacks(List<String> backs) {
-        this.backs = backs;
-    }
 }

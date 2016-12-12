@@ -2,7 +2,6 @@ package hu.ait.onetwelve.flash.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,13 +14,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import hu.ait.onetwelve.flash.AddDeckActivity;
 import hu.ait.onetwelve.flash.R;
-
-/**
- * Created by Camden Sikes on 12/11/2016.
- */
 
 public class AddedCardsAdapter extends RecyclerView.Adapter<AddedCardsAdapter.ViewHolder> {
 

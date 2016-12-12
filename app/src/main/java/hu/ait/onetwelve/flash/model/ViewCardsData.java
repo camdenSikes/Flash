@@ -1,4 +1,4 @@
-package hu.ait.onetwelve.flash;
+package hu.ait.onetwelve.flash.model;
 
 /**
  * Created by Brendan on 12/11/16.
@@ -48,5 +48,13 @@ public class ViewCardsData {
 
     public void setComplete(boolean complete) {
         this.complete = complete;
+    }
+
+    public void incrementListPos() {
+        listPos++;
+    }
+
+    public void incrementScore() {
+        score++;
     }
 }

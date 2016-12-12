@@ -10,10 +10,6 @@ import hu.ait.onetwelve.flash.fragments.MyDecksFragment;
 import hu.ait.onetwelve.flash.fragments.SearchFragment;
 import hu.ait.onetwelve.flash.fragments.SharedDecksFragment;
 
-/**
- * Created by Camden Sikes on 12/10/2016.
- */
-
 public class MainPagerAdapter extends FragmentPagerAdapter {
     private Context context;
 

@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,10 +29,6 @@ import hu.ait.onetwelve.flash.MainActivity;
 import hu.ait.onetwelve.flash.R;
 import hu.ait.onetwelve.flash.ViewCardsActivity;
 import hu.ait.onetwelve.flash.model.Deck;
-
-/**
- * Created by Camden Sikes on 12/10/2016.
- */
 
 public class DecksAdapter extends RecyclerView.Adapter<DecksAdapter.ViewHolder> {
 
