@@ -3,9 +3,6 @@ package hu.ait.onetwelve.flash;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
@@ -13,15 +10,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import hu.ait.onetwelve.flash.R;
 import hu.ait.onetwelve.flash.adapter.MainPagerAdapter;
-import hu.ait.onetwelve.flash.fragments.MyDecksFragment;
 
 public class MainActivity extends BaseActivity {
 
     public static final String KEY_KEY = "KEY_KEY";
     public static final String KEY_DECK = "KEY_DECK";
-    public static final int EDIT_DECK = 101;
 
     private MainPagerAdapter mPagerAdapter;
 
