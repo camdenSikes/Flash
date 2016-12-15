@@ -41,7 +41,8 @@ public class LoginActivity extends BaseActivity {
         database = FirebaseDatabase.getInstance().getReference();
         firebaseAuth = FirebaseAuth.getInstance();
         if(firebaseAuth.getCurrentUser()!=null){
-            etEmail.setText(firebaseAuth.getCurrentUser().getEmail());
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            finish();
         }
     }
 
