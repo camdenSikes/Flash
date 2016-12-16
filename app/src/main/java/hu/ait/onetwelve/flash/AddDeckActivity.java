@@ -1,12 +1,18 @@
 package hu.ait.onetwelve.flash;
 
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -22,15 +28,13 @@ public class AddDeckActivity extends BaseActivity {
 
     @BindView(R.id.etTitle)
     EditText etTitle;
-    @BindView(R.id.etCardFront)
-    EditText etCardFront;
-    @BindView(R.id.etCardBack)
-    EditText etCardBack;
     @BindView(R.id.recyclerAddedCards)
-
     RecyclerView recyclerAddedCards;
     AddedCardsAdapter addedCardsAdapter;
     private Bundle bd;
+    private String front;
+    private String back;
+    private boolean editingCard = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,12 +62,63 @@ public class AddDeckActivity extends BaseActivity {
 
     @OnClick(R.id.btnAddCard)
     void addCardClick() {
-        if(!isAddFormValid()){
-            return;
+        addCard();
+    }
+
+    public void addCard(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        View dialog = inflater.inflate(R.layout.dialog_add_card,null);
+        final EditText etCardFront = (EditText) dialog.findViewById(R.id.etCardFront);
+        final EditText etCardBack = (EditText) dialog.findViewById(R.id.etCardBack);
+        final String oldFront = front;
+        final String oldBack = back;
+        if(editingCard){
+            etCardFront.setText(front);
+            etCardBack.setText(back);
         }
-        addedCardsAdapter.addCard(etCardFront.getText().toString(),etCardBack.getText().toString());
-        etCardFront.getText().clear();
-        etCardBack.getText().clear();
+
+        builder.setTitle("Add Card")
+                .setView(dialog)
+                .setPositiveButton("Add Card", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        front = etCardFront.getText().toString();
+                        back = etCardBack.getText().toString();
+                        if(isAddFormValid()) {
+                            addedCardsAdapter.addCard(front, back);
+                            dialogInterface.dismiss();
+                        }
+                        else {
+                            Toast.makeText(AddDeckActivity.this, R.string.empty_card_error, Toast.LENGTH_SHORT).show();
+                        }
+                        editingCard = false;
+                    }
+
+                    private boolean isAddFormValid() {
+                        if (TextUtils.isEmpty(etCardFront.getText().toString())) {
+                            return false;
+                        }
+                        if (TextUtils.isEmpty(etCardBack.getText().toString())) {
+                            return false;
+                        }
+                        return true;
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if(editingCard){
+                            addedCardsAdapter.addCard(oldFront, oldBack);
+                        }
+                        editingCard = false;
+                        dialogInterface.dismiss();
+                    }
+                });
+
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
     @OnClick(R.id.btnSend)
@@ -93,23 +148,6 @@ public class AddDeckActivity extends BaseActivity {
         finish();
     }
 
-    private boolean isAddFormValid() {
-        boolean result = true;
-        if (TextUtils.isEmpty(etCardFront.getText().toString())) {
-            etCardFront.setError("Required");
-            result = false;
-        } else {
-            etCardFront.setError(null);
-        }
-        if (TextUtils.isEmpty(etCardBack.getText().toString())) {
-            etCardBack.setError("Required");
-            result = false;
-        } else {
-            etCardBack.setError(null);
-        }
-        return result;
-    }
-
     private boolean isSendFormValid() {
         if (TextUtils.isEmpty(etTitle.getText().toString())) {
             etTitle.setError("Required");
@@ -120,11 +158,15 @@ public class AddDeckActivity extends BaseActivity {
         }
     }
 
-    public void setCardFrontText(String cardFrontText) {
-        etCardFront.setText(cardFrontText);
+    public void setEditingCard(boolean editingCard){
+        this.editingCard = editingCard;
     }
 
-    public void setCardBackText(String cardBackText) {
-        etCardBack.setText(cardBackText);
+    public void setFront(String front) {
+        this.front = front;
+    }
+
+    public void setBack(String back) {
+        this.back = back;
     }
 }

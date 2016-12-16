@@ -85,8 +85,10 @@ public class AddedCardsAdapter extends RecyclerView.Adapter<AddedCardsAdapter.Vi
         holder.btnEditCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((AddDeckActivity) context).setCardFrontText(frontList.get(position));
-                ((AddDeckActivity) context).setCardBackText(backList.get(position));
+                ((AddDeckActivity) context).setFront(frontList.get(position));
+                ((AddDeckActivity) context).setBack(backList.get(position));
+                ((AddDeckActivity) context).setEditingCard(true);
+                ((AddDeckActivity) context).addCard();
                 frontList.remove(position);
                 backList.remove(position);
                 notifyItemRemoved(position);
