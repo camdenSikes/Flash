@@ -1,9 +1,11 @@
 package hu.ait.onetwelve.flash;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.IBinder;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -35,6 +38,7 @@ public class AddDeckActivity extends BaseActivity {
     private String front;
     private String back;
     private boolean editingCard = false;
+    Activity activity = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +122,16 @@ public class AddDeckActivity extends BaseActivity {
                 });
 
         AlertDialog alert = builder.create();
+
+        alert.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                View view = activity.getCurrentFocus();
+                InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                mgr.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
+        });
+
         alert.show();
     }
 
