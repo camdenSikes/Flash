@@ -16,6 +16,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -33,6 +34,8 @@ public class AddDeckActivity extends BaseActivity {
     EditText etTitle;
     @BindView(R.id.recyclerAddedCards)
     RecyclerView recyclerAddedCards;
+    @BindView(R.id.switchPriv)
+    CompoundButton switchPriv;
     AddedCardsAdapter addedCardsAdapter;
     private Bundle bd;
     private String front;
@@ -54,6 +57,7 @@ public class AddDeckActivity extends BaseActivity {
         if(bd != null) {
             Deck editDeck = (Deck) bd.get(MainActivity.KEY_DECK);
             etTitle.setText(editDeck.getTitle());
+            switchPriv.setChecked(editDeck.isPrivate());
             addedCardsAdapter = new AddedCardsAdapter(this, editDeck.getFronts(), editDeck.getBacks());
 
 
@@ -153,7 +157,7 @@ public class AddDeckActivity extends BaseActivity {
         }
         Deck newDeck = new Deck(getUid(), getUserName(),
                 etTitle.getText().toString(), addedCardsAdapter.getFrontList(),
-                addedCardsAdapter.getBackList());
+                addedCardsAdapter.getBackList(), switchPriv.isChecked());
 
         FirebaseDatabase.getInstance().getReference().child("deck").child(key).setValue(newDeck);
 

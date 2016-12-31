@@ -211,7 +211,7 @@ public class DecksAdapter extends RecyclerView.Adapter<DecksAdapter.ViewHolder> 
         for (DataSnapshot deckSnapshot : dataSnapshot.getChildren()) {
             String key = deckSnapshot.getKey();
             Deck deck = deckSnapshot.getValue(Deck.class);
-            if (!uid.equals(deck.getUid())) {
+            if (/*!uid.equals(deck.getUid()) &&*/ !deck.isPrivate()) {
                 deckKeys.add(key);
                 deckList.add(deck);
             }

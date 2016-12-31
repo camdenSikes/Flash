@@ -111,9 +111,11 @@ public class SearchFragment extends Fragment {
 
         for (DataSnapshot deckSnapshot : dataSnapshot.getChildren()) {
             Deck deck = deckSnapshot.getValue(Deck.class);
-            String title = deck.getTitle();
-            double length = lcs.length(title.toLowerCase(), query.toLowerCase());
-            list.add(Pair.create(length, deckSnapshot));
+            if(!deck.isPrivate()) {
+                String title = deck.getTitle();
+                double length = lcs.length(title.toLowerCase(), query.toLowerCase());
+                list.add(Pair.create(length, deckSnapshot));
+            }
         }
 
         Collections.sort(list, new ComparePairs());
