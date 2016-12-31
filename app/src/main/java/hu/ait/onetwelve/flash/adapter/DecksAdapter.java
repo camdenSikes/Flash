@@ -92,7 +92,7 @@ public class DecksAdapter extends RecyclerView.Adapter<DecksAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        Deck tmpDeck = deckList.get(position);
+        final Deck tmpDeck = deckList.get(position);
         holder.tvAuthor.setText(tmpDeck.getAuthor());
         holder.tvTitle.setText(tmpDeck.getTitle());
         holder.cardView.setOnClickListener(new View.OnClickListener() {

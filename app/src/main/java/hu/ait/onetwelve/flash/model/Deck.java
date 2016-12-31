@@ -41,9 +41,7 @@ public class Deck implements Serializable{
         return fronts;
     }
 
-
     public List<String> getBacks() {
         return backs;
     }
-
 }
