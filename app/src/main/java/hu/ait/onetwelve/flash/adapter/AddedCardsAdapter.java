@@ -102,18 +102,16 @@ public class AddedCardsAdapter extends RecyclerView.Adapter<AddedCardsAdapter.Vi
     }
 
     public void addCard(String front, String back) {
-        frontList.add(0, front);
-        backList.add(0, back);
-        notifyItemInserted(0);
+        frontList.add(front);
+        backList.add(back);
+        notifyItemInserted(frontList.size());
     }
 
     public List<String> getFrontList() {
-        Collections.reverse(frontList);
         return frontList;
     }
 
     public List<String> getBackList() {
-        Collections.reverse(backList);
         return backList;
     }
 }
