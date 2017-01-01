@@ -31,7 +31,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="section_format">Hello World from section: %1$d</string>
-    <string name="app_desc">Flash is an elegantly simple and social flashcard application created by Camden Sikes and Brendan Friesen</string>
+    <string name="app_desc">Created by Camden Sikes and Brendan Friesen</string>
     <string name="empty_card_error">Card front and back cannot be empty</string>
     <string name="share">Share</string>
     <string name="unshare">Unshare</string>
