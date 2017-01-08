@@ -53,20 +53,20 @@ public class ViewCardsActivity extends AppCompatActivity {
         else {
             setupFlipViews();
             updateCardInfo();
+
+            flipLayout.setOnFlipListener(new FlipLayout.OnFlipListener() {
+                @Override
+                public void onFlipStart(FlipLayout view) {
+
+                }
+
+                @Override
+                public void onFlipEnd(FlipLayout view) {
+                    fabCorrect.setVisibility(View.VISIBLE);
+                    fabIncorrect.setVisibility(View.VISIBLE);
+                }
+            });
         }
-
-        flipLayout.setOnFlipListener(new FlipLayout.OnFlipListener() {
-            @Override
-            public void onFlipStart(FlipLayout view) {
-
-            }
-
-            @Override
-            public void onFlipEnd(FlipLayout view) {
-                fabCorrect.setVisibility(View.VISIBLE);
-                fabIncorrect.setVisibility(View.VISIBLE);
-            }
-        });
     }
 
     private void setupFlipViews() {
@@ -128,5 +128,13 @@ public class ViewCardsActivity extends AppCompatActivity {
         tvBack.setText(back);
         fabCorrect.setVisibility(View.INVISIBLE);
         fabIncorrect.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void onBackPressed() {
+        ViewCardsData.getInstance().setComplete(false);
+        ViewCardsData.getInstance().setScore(0);
+        ViewCardsData.getInstance().setListPos(0);
+        super.onBackPressed();
     }
 }
