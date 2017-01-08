@@ -78,6 +78,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         if (id == R.id.logout) {
             FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(this, LoginActivity.class));
+            finish();
         } else if (id == R.id.about) {
             Toast.makeText(this, R.string.app_desc, Toast.LENGTH_LONG).show();
         }
